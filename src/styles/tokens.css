@@ -1,0 +1,85 @@
+/**
+ * Design tokens.
+ *
+ * The app commits to a single dark theme rather than supporting both. A finance
+ * workspace is read in long sessions against dense numbers, and one theme
+ * executed precisely beats two executed approximately.
+ *
+ * Green is reserved. It marks the primary action, an active nav item, a gain,
+ * and a mastered skill — nothing else. The moment it decorates something
+ * neutral it stops carrying meaning, and this interface leans on it to
+ * distinguish a gain from a loss at a glance.
+ */
+:root {
+  color-scheme: dark;
+
+  /* Surfaces, from furthest back to nearest front. */
+  --bg: #0a0f0d;
+  --surface: #10161400;
+  --surface-1: #111815;
+  --surface-2: #16201c;
+  --surface-3: #1d2a25;
+  --surface-raised: #1a2521;
+
+  --line: #22302b;
+  --line-strong: #2e3f38;
+
+  --text: #e8f0ec;
+  --text-secondary: #a3b5ac;
+  --text-muted: #6e837a;
+  --text-faint: #4d5f57;
+
+  /* Brand green. 500 is the interactive default. */
+  --green-100: #d3f4e2;
+  --green-300: #6ee7a8;
+  --green-400: #43d98b;
+  --green-500: #22c56f;
+  --green-600: #17a75b;
+  --green-700: #0f7d43;
+  --green-900: #0a3d24;
+  --green-glow: rgb(34 197 111 / 0.16);
+
+  --red-400: #f87171;
+  --red-500: #ef4444;
+  --red-900: #3d1616;
+
+  --amber-400: #fbbf24;
+  --amber-900: #3d2f0a;
+
+  --blue-400: #60a5fa;
+  --blue-900: #16294a;
+
+  /* Spacing: an 8px scale with two half-steps for dense rows. */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+  --s8: 64px;
+
+  --radius-sm: 5px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+
+  --text-xs: 11px;
+  --text-sm: 12.5px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-lg: 20px;
+  --text-xl: 27px;
+  --text-2xl: 36px;
+
+  --font: ui-sans-serif, -apple-system, "Segoe UI", Inter, Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow: 0 4px 16px rgb(0 0 0 / 0.45);
+  --shadow-lg: 0 18px 48px rgb(0 0 0 / 0.55);
+
+  --sidebar-width: 232px;
+  --max-content: 1120px;
+}
