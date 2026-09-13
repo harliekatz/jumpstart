@@ -2,7 +2,7 @@
  * The single reducer.
  *
  * All state transitions live here as pure functions so the interesting
- * behaviour — mastery updates, XP awards, review scheduling — is testable
+ * behavior — mastery updates, XP awards, review scheduling — is testable
  * without mounting a component. `now` is threaded through every dated action as
  * a parameter rather than read from the clock inside, which is what makes the
  * streak and spaced-repetition tests able to assert on specific dates.

@@ -3,7 +3,7 @@
 /**
  * The forum.
  *
- * The seeded threads are written content with invented authors, labelled as such
+ * The seeded threads are written content with invented authors, labeled as such
  * at the top of the page. Replies the learner writes stay on their device.
  */
 import { useState } from "react";

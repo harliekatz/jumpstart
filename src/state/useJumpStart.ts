@@ -12,7 +12,7 @@ import { loadState, saveState, clearState, initialState } from "@/lib/storage";
 import { curriculumProgress, dueSkills, recommend } from "@/lib/scheduler";
 import { levelProgress, streakLength } from "@/lib/progress";
 import { viewPortfolio } from "@/lib/portfolio";
-import { summarise } from "@/lib/budget";
+import { summarize } from "@/lib/budget";
 import { reduce, type Action } from "./reducer";
 import type { LearnerState } from "@/lib/types";
 
@@ -32,7 +32,7 @@ export interface JumpStartApi {
   level: ReturnType<typeof levelProgress>;
   streak: number;
   portfolio: ReturnType<typeof viewPortfolio>;
-  budget: ReturnType<typeof summarise>;
+  budget: ReturnType<typeof summarize>;
 }
 
 export function useJumpStart(): JumpStartApi {
@@ -88,7 +88,7 @@ export function useJumpStart(): JumpStartApi {
       level: levelProgress(state.xp),
       streak: streakLength(state.activeDays),
       portfolio: viewPortfolio(state.portfolio),
-      budget: summarise(state.budget.monthlyIncome, state.budget.allocations),
+      budget: summarize(state.budget.monthlyIncome, state.budget.allocations),
     }),
     [state],
   );

@@ -3,10 +3,8 @@
 /**
  * The full curriculum, grouped by track.
  *
- * Locked lessons stay visible and name the prerequisite that is blocking them.
- * Hiding them would make the course look shorter than it is and give no sense of
- * where a track goes; greying them out with no explanation is the usual
- * compromise and tells the learner nothing actionable.
+ * Locked lessons stay visible and name the prerequisite blocking them, so the
+ * shape of each track is readable and the next step is actionable.
  */
 import { Check, Circle, Lock } from "lucide-react";
 import { LESSONS, SKILLS, lessonsForSkill } from "@/lib/curriculum";
@@ -97,7 +95,7 @@ export function Learn({
                       <span className="lesson-sub">
                         {unlocked
                           ? lesson.summary
-                          : `Locked — finish ${blockers.map((blocker) => blocker.title).join(" and ")}`}
+                          : `Locked until you finish ${blockers.map((blocker) => blocker.title).join(" and ")}`}
                       </span>
                     </span>
 

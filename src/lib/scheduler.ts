@@ -1,22 +1,27 @@
 /**
  * What to study next, and why.
  *
- * The scheduler ranks every lesson and returns the top few with the reasoning
- * attached. Showing the reasoning is a product decision, not a debugging aid:
- * an app that says "do this next" and cannot say why is asking for trust it has
- * not earned, and a learner who disagrees with the recommendation has no way to
- * tell whether the system is wrong or they are.
+ * Every available lesson gets a score. The top few are returned with the
+ * reasons that produced the score attached, so a learner can see what the
+ * recommendation was based on.
  *
- * Four contributions, in descending priority:
+ * The score is a weighted sum, not a priority order. Six terms are added
+ * together and the highest total wins, which means a lower-weighted term can
+ * outrank a higher-weighted one when several apply:
  *
- *   1. Overdue review     a skill past its spaced-repetition due date
- *   2. Foundation gap     a prerequisite that is blocking other lessons
- *   3. Goal alignment     the track the learner said they care about
- *   4. Room to improve    low mastery means more to gain
+ *   overdue review    up to 90   a skill past its spaced-repetition due date
+ *   room to improve   up to 30   scaled by 1 - P(mastered)
+ *   foundation        up to 25   scaled by how many lessons it unblocks
+ *   goal alignment    up to 20   the track the learner chose
+ *   unread            8          the lesson has not been opened
+ *   short lesson      up to 1.2  tie-break toward a quicker win
  *
- * Lessons whose prerequisites are unmet are excluded entirely rather than
- * down-weighted. Serving capital gains to somebody who has not met compounding
- * produces a bad first experience that no amount of ranking finesse recovers.
+ * Only the overdue term is large enough to dominate the rest on its own. A
+ * lesson with 90 from an overdue review always outranks one without, since the
+ * other five terms sum to at most 84.2.
+ *
+ * Lessons with unmet prerequisites are excluded from scoring rather than
+ * down-weighted, so a locked lesson can never surface however weak its track is.
  */
 import { GOALS, LESSONS, LESSONS_BY_ID, SKILLS } from "./curriculum";
 import { MASTERY_THRESHOLD, daysOverdue } from "./mastery";

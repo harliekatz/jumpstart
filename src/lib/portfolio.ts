@@ -2,14 +2,11 @@
  * Paper trading.
  *
  * Holdings use volume-weighted average cost, which is what a broker reports and
- * what makes unrealised gain meaningful across multiple purchases at different
- * prices. A sell reduces share count and leaves the cost basis per share alone,
- * so selling half a position does not change what the remaining half cost.
+ * what keeps unrealized gain meaningful across purchases at different prices. A
+ * sell reduces share count and leaves cost basis per share alone.
  *
- * The concentration readout is the reason this module exists. It is easy to
- * agree with the diversification lesson and then build a portfolio that is three
- * technology names; showing the sector weights and the resulting volatility next
- * to the holdings turns the lesson into feedback.
+ * The concentration and sector readouts turn the diversification lesson into
+ * feedback on the portfolio the learner actually built.
  */
 import {
   INSTRUMENTS_BY_TICKER,
@@ -251,7 +248,7 @@ export function portfolioNotes(view: PortfolioView): { tone: "good" | "warn"; te
   if (view.concentration > 0.5 && view.positions.length > 1) {
     notes.push({
       tone: "warn",
-      text: `Your largest position dominates the portfolio. Concentration index ${view.concentration.toFixed(2)} — 1.00 would be a single holding.`,
+      text: `Your largest position dominates the portfolio. Concentration index ${view.concentration.toFixed(2)}, where 1.00 would be a single holding.`,
     });
   }
 

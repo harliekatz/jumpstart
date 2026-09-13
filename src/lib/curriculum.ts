@@ -78,7 +78,7 @@ export const LESSONS: Lesson[] = [
       },
       {
         heading: "Fixed, variable, and irregular",
-        body: "Fixed costs are the same every month. Variable costs move with behaviour: groceries, fuel, going out. Irregular costs are the ones that wreck budgets because they are annual or unpredictable: car registration, a dental bill, a wedding you have to fly to. The fix is to divide the annual total by twelve and treat it as a monthly line, so the money is already set aside when the bill arrives.",
+        body: "Fixed costs are the same every month. Variable costs move with behavior: groceries, fuel, going out. Irregular costs are the ones that wreck budgets because they are annual or unpredictable: car registration, a dental bill, a wedding you have to fly to. The fix is to divide the annual total by twelve and treat it as a monthly line, so the money is already set aside when the bill arrives.",
         callout: "A $900 annual insurance premium is a $75 monthly line, not a surprise in March.",
       },
     ],
@@ -195,12 +195,12 @@ export const LESSONS: Lesson[] = [
     sections: [
       {
         heading: "The inputs",
-        body: "Scoring models weight payment history most heavily, followed by amounts owed relative to limits, then length of credit history, credit mix and recent applications. Payment history and utilisation together account for the large majority of the score, which means the two things worth attention are paying on time and keeping balances low relative to limits.",
+        body: "Scoring models weight payment history most heavily, followed by amounts owed relative to limits, then length of credit history, credit mix and recent applications. Payment history and utilization together account for the large majority of the score, which means the two things worth attention are paying on time and keeping balances low relative to limits.",
       },
       {
-        heading: "Utilisation is a snapshot",
-        body: "Utilisation is measured when the issuer reports, usually at statement close, not at the due date. Somebody who spends heavily and pays in full every month can still show high utilisation if the statement closes before the payment. Paying down before the statement date, rather than only by the due date, changes the reported figure.",
-        callout: "Utilisation = reported balance ÷ total limit. $900 on a $3,000 limit reports as 30%.",
+        heading: "Utilization is a snapshot",
+        body: "Utilization is measured when the issuer reports, usually at statement close, not at the due date. Somebody who spends heavily and pays in full every month can still show high utilization if the statement closes before the payment. Paying down before the statement date, rather than only by the due date, changes the reported figure.",
+        callout: "Utilization = reported balance ÷ total limit. $900 on a $3,000 limit reports as 30%.",
       },
     ],
     items: ["c3", "c4"],
@@ -235,7 +235,7 @@ export const LESSONS: Lesson[] = [
     sections: [
       {
         heading: "Collateral prices risk",
-        body: "Secured debt is backed by an asset the lender can take: a mortgage by the house, an auto loan by the car. If the borrower defaults, the lender recovers most of the money, so the rate is lower. Unsecured debt — credit cards, most personal loans, student loans — has no such backstop, so the rate carries the full cost of default risk.",
+        body: "Secured debt is backed by an asset the lender can take: a mortgage by the house, an auto loan by the car. If the borrower defaults, the lender recovers most of the money, so the rate is lower. Unsecured debt, meaning credit cards, most personal loans and student loans, has no such backstop, so the rate carries the full cost of default risk.",
       },
       {
         heading: "What that means when consolidating",
@@ -280,7 +280,7 @@ export const LESSONS: Lesson[] = [
       },
       {
         heading: "The cost of waiting",
-        body: "Someone investing $300 a month from 25 to 35 and then stopping will often end up ahead of someone investing $300 a month from 35 to 65, despite contributing a third as much, because the early money has thirty extra years to compound. The intuition most people carry — that total contributions dominate — is simply wrong over long horizons.",
+        body: "Someone investing $300 a month from 25 to 35 and then stopping will often end up ahead of someone investing $300 a month from 35 to 65, despite contributing a third as much, because the early money has thirty extra years to compound. The intuition most people carry, that total contributions dominate, is wrong over long horizons.",
         callout: "At 7% nominal: $300/mo for 10 years starting at 25 outpaces $300/mo for 30 years starting at 35.",
       },
     ],
@@ -320,7 +320,7 @@ export const LESSONS: Lesson[] = [
       },
       {
         heading: "What does not count",
-        body: "Owning ten technology stocks is not diversified; they share the same sector shocks. Neither is holding several funds that all track the same index. Real diversification means variation in asset class, sector and geography — and, for most people, is achieved more cheaply by a broad index fund than by picking.",
+        body: "Owning ten technology stocks is not diversified; they share the same sector shocks. Neither is holding several funds that all track the same index. Real diversification means variation in asset class, sector and geography, and for most people it is achieved more cheaply by a broad index fund than by picking.",
         callout: "Ten stocks in one sector behave closer to one bet than to ten.",
       },
     ],
@@ -441,7 +441,7 @@ export const LESSONS: Lesson[] = [
       },
       {
         heading: "The rule of thumb, and its exception",
-        body: "Early in a career, when income and therefore marginal rate are low, Roth is usually favourable: you are paying tax at a rate you are unlikely to see again. At peak earnings, traditional is usually favourable. The exception that dominates both: an employer match is an immediate return on contribution that neither tax treatment comes close to, so contributing at least enough to capture the full match generally comes first.",
+        body: "Early in a career, when income and therefore marginal rate are low, Roth is usually favorable: you are paying tax at a rate you are unlikely to see again. At peak earnings, traditional is usually favorable. The exception that dominates both: an employer match is an immediate return on contribution that neither tax treatment comes close to, so contributing at least enough to capture the full match generally comes first.",
         callout: "A 50% match on the first 6% of salary is a 50% return before the market does anything.",
       },
     ],
@@ -461,7 +461,7 @@ export const LESSONS: Lesson[] = [
       },
       {
         heading: "Realisation and offsetting",
-        body: "Tax is owed when a gain is realised by selling, not while it accrues on paper. Realised losses can offset realised gains, and a limited amount of net loss can offset ordinary income, with the remainder carried forward. This is the mechanism behind tax-loss harvesting, which is a real effect and also frequently oversold.",
+        body: "Tax is owed when a gain is realized by selling, not while it accrues on paper. Realised losses can offset realized gains, and a limited amount of net loss can offset ordinary income, with the remainder carried forward. This is the mechanism behind tax-loss harvesting, which is a real effect and also frequently oversold.",
         callout: "Sold at 11 months: ordinary income rates. Sold at 13 months: long-term rates.",
       },
     ],

@@ -59,7 +59,7 @@ export function seedThreads(): Thread[] {
           id: "r-2a",
           author: "Ines",
           level: 14,
-          body: "Almost certainly utilisation timing. The issuer reports at statement close, not at your due date. You pay in full afterwards, so the reported balance is whatever you spent that cycle. Try paying down a few days before the statement closes and watch what reports.",
+          body: "Almost certainly utilization timing. The issuer reports at statement close, not at your due date. You pay in full afterwards, so the reported balance is whatever you spent that cycle. Try paying down a few days before the statement closes and watch what reports.",
           at: daysAgo(4),
         },
         {
@@ -84,7 +84,7 @@ export function seedThreads(): Thread[] {
           id: "r-3a",
           author: "Noé",
           level: 16,
-          body: "Competing does not help you. What matters is whether the same shock hits all of them, and sector-wide shocks — rates, chip supply, regulation — do exactly that. Six names in one sector behaves much closer to one bet than to six.",
+          body: "Competing does not help you. What matters is whether the same shock hits all of them, and sector-wide shocks such as rates, chip supply and regulation do exactly that. Six names in one sector behaves much closer to one bet than to six.",
           at: daysAgo(6),
         },
         {
@@ -126,7 +126,7 @@ export function seedThreads(): Thread[] {
       skill: "investing",
       author: "Dana",
       level: 9,
-      title: "0.6% expense ratio — is that actually bad?",
+      title: "0.6% expense ratio, is that actually bad?",
       body: "It is a fund my parents recommended. Sounds like nothing to me.",
       at: daysAgo(11),
       replies: [

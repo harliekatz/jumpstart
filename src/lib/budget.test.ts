@@ -7,12 +7,12 @@ import {
   futureValue,
   project,
   realValue,
-  summarise,
+  summarize,
 } from "./budget";
 
-describe("summarise", () => {
+describe("summarize", () => {
   it("groups allocations into needs, wants and savings", () => {
-    const summary = summarise(4000, { housing: 1500, dining: 300, retirement: 400 });
+    const summary = summarize(4000, { housing: 1500, dining: 300, retirement: 400 });
 
     expect(summary.needs).toBe(1500);
     expect(summary.wants).toBe(300);
@@ -22,23 +22,23 @@ describe("summarise", () => {
   });
 
   it("reports a negative remainder when over-committed", () => {
-    const summary = summarise(2000, { housing: 1800, dining: 400 });
+    const summary = summarize(2000, { housing: 1800, dining: 400 });
     expect(summary.unallocated).toBe(-200);
   });
 
   it("ignores unknown category ids rather than miscounting them", () => {
-    const summary = summarise(3000, { housing: 1000, "not-a-category": 900 });
+    const summary = summarize(3000, { housing: 1000, "not-a-category": 900 });
     expect(summary.allocated).toBe(1000);
   });
 
   it("treats negative and non-finite amounts as zero", () => {
-    const summary = summarise(3000, { housing: -500, food: Number.NaN, dining: 200 });
+    const summary = summarize(3000, { housing: -500, food: Number.NaN, dining: 200 });
     expect(summary.needs).toBe(0);
     expect(summary.wants).toBe(200);
   });
 
   it("does not divide by zero on zero income", () => {
-    const summary = summarise(0, { housing: 1000 });
+    const summary = summarize(0, { housing: 1000 });
     expect(summary.shares.need).toBe(0);
     expect(summary.savingsRate).toBe(0);
   });
@@ -52,7 +52,7 @@ describe("summarise", () => {
 
 describe("frameworkGap", () => {
   it("reports zero gaps on an exact 50/30/20 split", () => {
-    const summary = summarise(1000, { housing: 500, dining: 300, retirement: 200 });
+    const summary = summarize(1000, { housing: 500, dining: 300, retirement: 200 });
     const gap = frameworkGap(summary);
 
     expect(gap.need).toBeCloseTo(0, 6);
@@ -61,7 +61,7 @@ describe("frameworkGap", () => {
   });
 
   it("signs the gap so over-spending is positive and under-saving is negative", () => {
-    const summary = summarise(1000, { housing: 700, dining: 200, retirement: 100 });
+    const summary = summarize(1000, { housing: 700, dining: 200, retirement: 100 });
     const gap = frameworkGap(summary);
 
     expect(gap.need).toBeGreaterThan(0);
@@ -72,7 +72,7 @@ describe("frameworkGap", () => {
 describe("emergencyRunway", () => {
   it("sizes the target against essentials, not income", () => {
     const allocations = { housing: 1600, food: 400, insurance: 200, emergency: 300 };
-    const summary = summarise(6000, allocations);
+    const summary = summarize(6000, allocations);
     const runway = emergencyRunway(summary, allocations, 3);
 
     // Essentials are 2,200 regardless of the 6,000 income.
@@ -83,13 +83,13 @@ describe("emergencyRunway", () => {
 
   it("returns null months when nothing is being contributed", () => {
     const allocations = { housing: 1000, emergency: 0 };
-    const summary = summarise(3000, allocations);
+    const summary = summarize(3000, allocations);
     expect(emergencyRunway(summary, allocations).monthsToTarget).toBeNull();
   });
 
   it("rounds partial months up, because the target is not met until it is met", () => {
     const allocations = { housing: 1000, emergency: 300 };
-    const summary = summarise(3000, allocations);
+    const summary = summarize(3000, allocations);
     // 3,000 target / 300 = exactly 10; nudge it to force a fraction.
     const partial = emergencyRunway(summary, { ...allocations, emergency: 290 });
     expect(partial.monthsToTarget).toBe(11);
@@ -154,7 +154,7 @@ describe("project", () => {
 
   it("works from the default budget without throwing", () => {
     const budget = defaultBudget();
-    const summary = summarise(budget.monthlyIncome, budget.allocations);
+    const summary = summarize(budget.monthlyIncome, budget.allocations);
     expect(project(summary.savings).every((row) => Number.isFinite(row.nominal))).toBe(true);
   });
 });

@@ -73,7 +73,7 @@ export interface BudgetSummary {
   savingsRate: number;
 }
 
-export function summarise(
+export function summarize(
   monthlyIncome: number,
   allocations: Record<string, number>,
 ): BudgetSummary {

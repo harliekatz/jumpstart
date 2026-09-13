@@ -138,8 +138,9 @@ describe("recommend", () => {
   });
 
   it("prefers a foundation lesson over an equally fresh leaf", () => {
-    // Both available and both unstudied, but compounding unblocks four lessons
-    // and credit-scores unblocks one.
+    // Both available and both unstudied, but compounding unblocks six lessons
+    // and credit-scores unblocks one. The goal also favours compounding here,
+    // so this checks the combined ranking rather than the foundation term alone.
     const state = { ...initialState(), goal: "start-investing" as const };
     const ranked = recommend(state, new Date(), 20);
 
@@ -202,5 +203,55 @@ describe("progress reporting", () => {
       "budgeting",
       "taxes",
     ]);
+  });
+});
+
+describe("the score is a weighted sum, not a priority order", () => {
+  it("lets room to improve outrank a stronger foundation signal", () => {
+    // compounding unblocks six lessons (foundation 25) but sits at high mastery.
+    // credit-scores unblocks one (foundation 5) and sits at low mastery. With no
+    // goal set, the room-to-improve term decides, which a strict priority
+    // reading of the term order would not predict.
+    const base = initialState();
+    const state: LearnerState = {
+      ...base,
+      goal: null,
+      skills: {
+        ...base.skills,
+        investing: { ...base.skills.investing, known: 0.95 },
+        credit: { ...base.skills.credit, known: 0.1 },
+      },
+    };
+
+    const ranked = recommend(state, new Date(), 20);
+    const compounding = ranked.findIndex((entry) => entry.lesson.id === "compounding");
+    const creditScores = ranked.findIndex((entry) => entry.lesson.id === "credit-scores");
+
+    expect(compounding).toBeGreaterThanOrEqual(0);
+    expect(creditScores).toBeGreaterThanOrEqual(0);
+    expect(creditScores).toBeLessThan(compounding);
+  });
+
+  it("lets an overdue review outrank every other term combined", () => {
+    // The overdue term peaks at 90 and the other five sum to at most 84.2, so
+    // this one really is decisive on its own.
+    const base = initialState();
+    const state: LearnerState = {
+      ...base,
+      goal: "start-investing",
+      lessons: {
+        ...base.lessons,
+        "cash-flow": { read: true, bestScore: 1, attempts: 1, completedAt: null },
+      },
+      skills: {
+        ...base.skills,
+        budgeting: { ...base.skills.budgeting, dueAt: "2026-03-01", intervalDays: 4 },
+        investing: { ...base.skills.investing, known: 0.05 },
+      },
+    };
+
+    const top = recommend(state, new Date("2026-03-20T12:00:00Z"))[0];
+    expect(top?.kind).toBe("review");
+    expect(top?.lesson.skill).toBe("budgeting");
   });
 });

@@ -7,7 +7,7 @@ import type { SkillId, SkillState } from "@/lib/types";
 
 export function Meter({ value, tone }: { value: number; tone?: "auto" | "green" }) {
   const clamped = Math.max(0, Math.min(1, value));
-  // Colour carries the reading below 40 / 75 percent, so the bar is legible
+  // Color carries the reading below 40 / 75 percent, so the bar is legible
   // without reading the number beside it.
   const variant =
     tone === "green" ? "" : clamped < 0.4 ? " is-low" : clamped < 0.75 ? " is-mid" : "";
@@ -40,11 +40,11 @@ export function Stat({
 }
 
 /**
- * One track's mastery, with its confidence label.
+ * One track's mastery estimate, with a label for how much evidence supports it.
  *
- * The confidence word is not decoration. A 62 percent estimate from three
- * answers and a 62 percent estimate from twenty answers mean very different
- * things, and showing only the percentage would present them as identical.
+ * A 62 percent estimate from three answers and one from twenty answers mean
+ * different things. The label is derived from answer count alone, so it
+ * describes evidence volume rather than statistical confidence.
  */
 export function MasteryRow({ skill, state }: { skill: SkillId; state: SkillState }) {
   const label = confidenceLabel(state);

@@ -10,15 +10,18 @@
  *   pSlip     probability of getting an item wrong while having mastered it
  *   pGuess    probability of getting an item right without having mastered it
  *
- * Why this rather than percent-correct: percent-correct treats the tenth answer
- * like the first and cannot distinguish "got it right by luck on an easy item"
- * from "got it right on a hard one". BKT separates the observation from the
- * latent skill, which is exactly the distinction the learning path needs to make.
+ * BKT separates the observation from the latent skill, so a correct answer on an
+ * easy item and a correct answer on a hard one move the estimate by different
+ * amounts. Percent-correct treats them identically.
  *
  * Item difficulty modulates slip and guess. A hard item is easier to slip on and
- * harder to guess, so a correct answer on a hard item moves the estimate more
- * than a correct answer on an easy one. That is the whole reason the diagnostic
- * can be twelve questions instead of forty.
+ * harder to guess, so a correct answer on a hard item moves the estimate more.
+ * Difficulties here are hand-assigned rather than fitted from response data, so
+ * the estimates show the mechanism working rather than a calibrated measurement.
+ *
+ * Reference: Corbett, A. T. and Anderson, J. R. (1995), "Knowledge tracing:
+ * modeling the acquisition of procedural knowledge", User Modeling and
+ * User-Adapted Interaction 4(4).
  */
 import type { SkillState } from "./types";
 
@@ -97,13 +100,15 @@ export function updateKnown(
 }
 
 /**
- * How much to trust the estimate.
+ * How much evidence the estimate rests on.
  *
- * BKT gives a probability but not an error bar. Rather than invent one, this
- * reports evidence volume on a saturating curve: a learner who has answered
- * twelve items in a track has a well-supported estimate, one who has answered
- * two does not. The UI shows this as "low / moderate / high confidence" so the
- * number is never presented as more certain than it is.
+ * This is a heuristic function of answer count alone. It reads no other field,
+ * so it is not a posterior variance, a credible interval or a standard error,
+ * and two learners with the same number of answers get the same label whatever
+ * those answers were. It is shown as low, moderate or high so that a mastery
+ * figure from three answers is not read the same way as one from twenty.
+ *
+ * Thresholds land at roughly 4 and 10 answers.
  */
 export function confidence(state: SkillState): number {
   return 1 - Math.exp(-state.attempts / 6);
@@ -117,13 +122,17 @@ export function confidenceLabel(state: SkillState): "low" | "moderate" | "high" 
 }
 
 /**
- * SM-2 style review scheduling.
+ * Review scheduling, adapted from SM-2.
  *
- * `quality` is the practice score on the session, 0-1, mapped onto SM-2's 0-5
- * scale. Anything below 0.6 resets the interval: a skill you just failed is not
- * a skill to revisit in three weeks. The ease factor floor of 1.3 is from the
- * original algorithm and stops a repeatedly-failed skill from collapsing to
- * daily forever.
+ * The ease-factor update and the 1.3 floor are SM-2 as published. Three things
+ * differ, and they matter enough to name:
+ *
+ *   - Quality is a whole practice session's score rescaled to 0-5, not a
+ *     per-item recall grade, so fractional values reach the ease formula.
+ *   - State is held per track rather than per item, so four skills are
+ *     scheduled rather than forty-four questions.
+ *   - The second interval is 4 days rather than SM-2's 6, and a failed session
+ *     sets the interval to 1 day instead of restarting a repetition count.
  */
 export function scheduleReview(
   state: SkillState,

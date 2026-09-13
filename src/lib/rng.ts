@@ -32,7 +32,7 @@ export function hashSeed(text: string): number {
 
 /**
  * Standard normal via Box-Muller. The market model needs gaussian shocks, and
- * summing uniforms would give the wrong tail behaviour.
+ * summing uniforms would give the wrong tail behavior.
  */
 export function gaussian(next: () => number): number {
   let u = 0;

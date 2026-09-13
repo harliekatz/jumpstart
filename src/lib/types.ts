@@ -6,7 +6,7 @@
  * carries a value that a real deployment would need to keep secret.
  */
 
-/** The four tracks the curriculum is organised into. */
+/** The four tracks the curriculum is organized into. */
 export type SkillId =
   | "budgeting"
   | "credit"

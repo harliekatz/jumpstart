@@ -1,12 +1,11 @@
 "use client";
 
 /**
- * The home screen: what to do next, and the reasoning behind it.
+ * The home screen. What to study next, and the reasons behind the ordering.
  *
- * The "why this" block under each recommendation is the product. Every other
- * adaptive learning app makes the same claim about personalisation; showing the
- * mastery estimate, the prerequisite chain and the review clock that produced
- * the ordering is what turns the claim into something a learner can check.
+ * Each recommendation card carries the terms that produced its score, including
+ * the mastery estimate, how many lessons it unblocks and whether a review is
+ * due, so a learner can judge the suggestion rather than take it on trust.
  */
 import { ArrowRight, Clock, Flame, Layers, Sparkles, Target } from "lucide-react";
 import { SKILLS } from "@/lib/curriculum";
@@ -55,7 +54,7 @@ export function Today({
           <h1>{greeting}</h1>
           <p>
             {due.length > 0
-              ? `${due.length} ${due.length === 1 ? "track is" : "tracks are"} due for review. Reviews come first — spacing is what makes the material stick.`
+              ? `${due.length} ${due.length === 1 ? "track is" : "tracks are"} due for review. Reviews come first, because spacing is what makes the material stick.`
               : "Nothing is overdue. This is what the scheduler suggests next, and why."}
           </p>
         </div>
@@ -129,9 +128,9 @@ export function Today({
             ))}
           </div>
           <p style={{ marginTop: "var(--s4)", fontSize: "var(--text-sm)" }}>
-            These are Bayesian estimates, not percent-correct. Answering a hard question
-            correctly moves them further than an easy one, and the confidence label tells
-            you how much evidence each estimate rests on.
+            These are Bayesian estimates rather than percent correct. Answering a hard
+            question correctly moves them further than an easy one. The label beside each
+            figure says how much evidence it rests on.
           </p>
         </div>
       </div>

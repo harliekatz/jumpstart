@@ -3,10 +3,8 @@
 /**
  * Read, then practice, then see what the answers did to the estimate.
  *
- * The third phase is the unusual one. Most apps report a score; this reports the
- * mastery estimate before and after, so the learner can see that four right
- * answers on easy items moved the number less than two right answers on hard
- * ones. It is the clearest place in the app to make the model legible.
+ * The summary reports the mastery estimate before and after alongside the raw
+ * score, so the effect of item difficulty on the estimate is visible.
  */
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
@@ -229,7 +227,7 @@ function Summary({
         <span>
           {passed
             ? `${correct} of ${items} correct. Lesson complete.`
-            : `${correct} of ${items} correct. You need 80% to mark this complete — the material stays available and the review comes back sooner.`}
+            : `${correct} of ${items} correct. You need 80% to mark this complete. The material stays available and the review comes back sooner.`}
         </span>
       </div>
 
@@ -256,8 +254,13 @@ function Summary({
           </div>
           <div>
             <div className="eyebrow">After</div>
+            {/* The delta is only colored as a gain when the session was also
+                passed. A failed session can still raise the estimate, because
+                the model treats each attempt as a chance to learn from the
+                explanation, and showing that in green reads as praise for a
+                result that was not good. */}
             <div
-              className={`stat-value ${delta >= 0 ? "gain" : "loss"}`}
+              className={`stat-value ${passed && delta >= 0 ? "gain" : delta < 0 ? "loss" : ""}`}
               style={{ fontSize: "var(--text-lg)" }}
             >
               {percent(after)}
@@ -272,9 +275,18 @@ function Summary({
           </div>
         </div>
 
+        {!passed && delta > 0 && (
+          <p style={{ marginTop: "var(--s3)", fontSize: "var(--text-sm)" }}>
+            The estimate rose even though the answers were wrong. The model gives
+            each attempt a chance of teaching the skill, because you read the
+            explanation after every question. Passing the practice is what marks
+            the lesson complete.
+          </p>
+        )}
+
         <p style={{ marginTop: "var(--s4)", fontSize: "var(--text-sm)" }}>
           Next review scheduled for{" "}
-          <strong style={{ color: "var(--text)" }}>{nextReview.dueAt}</strong> — in{" "}
+          <strong style={{ color: "var(--text)" }}>{nextReview.dueAt}</strong>, in{" "}
           {nextReview.intervalDays} day{nextReview.intervalDays === 1 ? "" : "s"}. Pass it
           on time and the interval stretches; miss it and it resets to tomorrow.
         </p>

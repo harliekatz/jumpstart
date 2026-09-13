@@ -109,14 +109,14 @@ describe("generateMarket", () => {
     const measured = INSTRUMENTS.map((instrument) => ({
       ticker: instrument.ticker,
       declared: Math.sqrt((instrument.beta * 0.16) ** 2 + instrument.volatility ** 2),
-      realised: realisedVolatility(instrument.ticker, TRADING_DAYS, TRADING_DAYS),
+      realized: realisedVolatility(instrument.ticker, TRADING_DAYS, TRADING_DAYS),
     }));
 
     // Realised volatility over a single path is noisy, so this asserts the
     // relationship holds loosely rather than exactly.
     for (const entry of measured) {
-      expect(entry.realised).toBeGreaterThan(entry.declared * 0.5);
-      expect(entry.realised).toBeLessThan(entry.declared * 1.9);
+      expect(entry.realized).toBeGreaterThan(entry.declared * 0.5);
+      expect(entry.realized).toBeLessThan(entry.declared * 1.9);
     }
   });
 

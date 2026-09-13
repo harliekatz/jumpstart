@@ -76,7 +76,7 @@ export function Progress({
                   <th className="num">P(mastered)</th>
                   <th className="num">Answered</th>
                   <th className="num">Correct</th>
-                  <th>Confidence</th>
+                  <th>Evidence</th>
                   <th>Next review</th>
                 </tr>
               </thead>
@@ -138,8 +138,13 @@ export function Progress({
             <p style={{ fontSize: "var(--text-sm)" }}>
               Bayesian Knowledge Tracing. Each answer updates the probability you have
               mastered the track, weighted by how hard the question was. A correct answer
-              on a hard item is stronger evidence than one on an easy item, because the
-              chance of guessing it is lower.
+              on a hard item moves the estimate more than one on an easy item, because
+              the chance of guessing it is lower.
+            </p>
+            <p style={{ marginTop: "var(--s2)", fontSize: "var(--text-sm)" }}>
+              The evidence column counts how many questions the estimate rests on. It is
+              a low, moderate or high label derived from answer count, not a statistical
+              confidence interval.
             </p>
             <table className="table" style={{ marginTop: "var(--s3)" }}>
               <tbody>
