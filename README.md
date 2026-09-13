@@ -2,7 +2,7 @@
 
 A financial literacy app that places a learner with a short test, then builds a lesson path around what they already know and shows why each lesson was chosen.
 
-**Demo.** Not deployed yet. [Run it locally](#run-it-locally) in about a minute.
+**Demo.** [jumpstart-finance.netlify.app](https://jumpstart-finance.netlify.app)
 
 ![The Today screen showing the next recommended lesson with the reasons behind the recommendation](docs/screens/05-today.png)
 
